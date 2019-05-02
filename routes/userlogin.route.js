@@ -10,7 +10,8 @@ router.post('/login', (req, res) => {
             res.status(400).send({ message: 'Email ID Not Exist', result: false });
         } else {
             var hash = bcrypt.compareSync(req.body.password, result.password);
-            if (hash) {
+            console.log(result.password);
+            if (!hash) {
                 var token = jwt.sign({ email: result.email }, secretKey, {
                     expiresIn: 86400 // expires in 24 hours
                 });
